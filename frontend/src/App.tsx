@@ -60,6 +60,7 @@ function App() {
 			<br />
 
 			<h1>{songs[idx].name}</h1>
+			<p>Some text</p>
 
 			<button onClick={toggleSong}>{isPlaying ? "Stop" : "Play"}</button>
 			<button onClick={nextSong}>Next</button>
