@@ -2,13 +2,15 @@ language: node_js
 node_js:
   - lts/*
 install:
+  - cd frontend
   - npm ci
 script:
+  - cd frontend
   - npm run build
 deploy:
   provider: pages
   skip_cleanup: true
-  local_dir: dist
+  local_dir: frontend/dist
   # A token generated on GitHub allowing Travis to push code on you repository.
   # Set in the Travis settings page of your repository, as a secure variable.
   github_token: $GITHUB_TOKEN
