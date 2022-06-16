@@ -27,7 +27,7 @@ http {
   client_body_timeout 5;
 
   server {
-    listen 18252 reuseport;
+    listen 37692 reuseport;
     charset UTF-8;
     port_in_redirect off;
     keepalive_timeout 5;
@@ -37,7 +37,23 @@ http {
 
     location / {
       mruby_set $fallback /app/bin/config/lib/ngx_mruby/routes_fallback.rb cache;
-      try_files $uri $uri/ $fallback;
+
+      try_files $uri.html $uri $uri/ $fallback;
+
+    }
+
+
+    location ~ \.html$ {
+      try_files $uri =404;
+    }
+
+    location ~ ^/.*$ {
+      set $route /.*;
+      mruby_set $path /app/bin/config/lib/ngx_mruby/routes_path.rb cache;
+      mruby_set $fallback /app/bin/config/lib/ngx_mruby/routes_fallback.rb cache;
+
+      try_files $uri.html $uri $uri/ $path $fallback;
+
     }
 
   # need this b/c setting $fallback to =404 will try #{root}=404 instead of returning a 404
