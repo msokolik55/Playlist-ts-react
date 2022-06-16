@@ -4,7 +4,7 @@
 	"version": "0.0.0",
 	"scripts": {
 		"dev": "vite",
-		"build": "cd server && npm i; cd ..; tsc && vite build",
+		"build": "cd server && npm i && cd .. && tsc && vite build",
 		"preview": "vite preview"
 	},
 	"dependencies": {
